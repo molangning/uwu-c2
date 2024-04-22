@@ -21,6 +21,8 @@ uwu_map = dict(zip(uwu_list, b32_chars))
 
 ciphertext = open("encoded.txt").read().strip().split(" ")
 encoded_plaintext = "".join(uwu_map[word] for word in ciphertext)
-encoded_plaintext += "="*(8-len(encoded_plaintext)%8)
+
+if len(encoded_plaintext) % 8 != 0:
+    encoded_plaintext += "="*(8-len(encoded_plaintext)%8)
 
 print(b32decode(encoded_plaintext))
