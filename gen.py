@@ -3,11 +3,19 @@
 import json
 import random
 
+sample_size = 32
 uwu_list = json.load(open("dictionary.json"))
-uwu_list = uwu_list["faces"] + uwu_list["words"]
+
+if len(uwu_list["words"]) > sample_size / 2.2:
+    print("Using random combined selection") 
+    uwu_list = uwu_list["faces"] + uwu_list["words"]
+
+else:
+    print("Using words heavy random selection")
+    uwu_list = uwu_list["words"] + random.sample(uwu_list["faces"], sample_size - len(uwu_list["words"]) + int(sample_size / 4))
+    print(len(uwu_list))
 
 uwu_map = {}
-sample_size = 32
 
 uwu_map["map"] = random.sample(uwu_list, sample_size)
 
